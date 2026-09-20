@@ -1,0 +1,169 @@
+/* Tailwind CSS 4 theme mapping.
+ *
+ * Exposes the design system's tokens as Tailwind utilities, so `bg-page`,
+ * `text-accent`, `rounded-card`, `ease-glide`, `font-sans` and so on work in
+ * class names. Tailwind 4 reads `@theme` at build time — every entry here
+ * becomes a utility class AND stays available as a CSS variable.
+ *
+ * Install: see integration/README.md. Import AFTER styles.css so the raw
+ * tokens exist before they are referenced.
+ */
+
+@theme inline {
+  /* ── Fonts ───────────────────────────────────────────────────────────── */
+  --font-sans: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "Geist Mono", ui-monospace, monospace;
+
+  /* ── Colours: scales ─────────────────────────────────────────────────── */
+  --color-ink-990: var(--ink-990);
+  --color-ink-950: var(--ink-950);
+  --color-ink-900: var(--ink-900);
+  --color-ink-850: var(--ink-850);
+  --color-ink-800: var(--ink-800);
+  --color-ink-700: var(--ink-700);
+  --color-ink-600: var(--ink-600);
+  --color-ink-500: var(--ink-500);
+  --color-ink-400: var(--ink-400);
+
+  --color-paper-100: var(--paper-100);
+  --color-paper-200: var(--paper-200);
+  --color-paper-300: var(--paper-300);
+  --color-paper-400: var(--paper-400);
+  --color-paper-500: var(--paper-500);
+  --color-paper-600: var(--paper-600);
+  --color-paper-700: var(--paper-700);
+
+  --color-flare-100: var(--flare-100);
+  --color-flare-200: var(--flare-200);
+  --color-flare-300: var(--flare-300);
+  --color-flare-400: var(--flare-400);
+  --color-flare-500: var(--flare-500);
+  --color-flare-600: var(--flare-600);
+
+  --color-verdigris-200: var(--verdigris-200);
+  --color-verdigris-300: var(--verdigris-300);
+  --color-verdigris-400: var(--verdigris-400);
+
+  --color-sand-200: var(--sand-200);
+  --color-sand-300: var(--sand-300);
+
+  --color-positive: var(--signal-positive);
+  --color-warning: var(--signal-warning);
+  --color-danger: var(--signal-danger);
+
+  /* ── Colours: semantic aliases — prefer these in class names ─────────── */
+  --color-page: var(--bg-page);
+  --color-void: var(--bg-void);
+  --color-raised: var(--bg-raised);
+  --color-inset: var(--surface-inset);
+
+  --color-strong: var(--text-strong);
+  --color-body: var(--text-body);
+  --color-dim: var(--text-dim);
+  --color-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-press: var(--accent-press);
+  --color-accent-wash: var(--accent-wash);
+  --color-on-accent: var(--text-on-accent);
+
+  --color-hairline: var(--border-hairline);
+  --color-soft: var(--border-soft);
+  --color-edge-strong: var(--border-strong);
+  --color-edge-accent: var(--border-accent);
+
+  /* ── Type scale ──────────────────────────────────────────────────────── */
+  --text-display-1: var(--text-display-1);
+  --text-display-1--line-height: var(--leading-display);
+  --text-display-1--letter-spacing: var(--tracking-display);
+  --text-display-1--font-weight: var(--weight-light);
+
+  --text-display-2: var(--text-display-2);
+  --text-display-2--line-height: var(--leading-display);
+  --text-display-2--letter-spacing: var(--tracking-display);
+  --text-display-2--font-weight: var(--weight-light);
+
+  --text-h1: var(--text-h1);
+  --text-h1--line-height: var(--leading-tight);
+  --text-h1--letter-spacing: var(--tracking-heading);
+
+  --text-h2: var(--text-h2);
+  --text-h2--line-height: var(--leading-tight);
+  --text-h2--letter-spacing: var(--tracking-heading);
+
+  --text-h3: var(--text-h3);
+  --text-h3--line-height: var(--leading-snug);
+  --text-h3--letter-spacing: var(--tracking-heading);
+
+  --text-lead: var(--text-body-lg);
+  --text-lead--line-height: var(--leading-body);
+
+  --text-label: var(--text-label);
+  --text-label--letter-spacing: var(--tracking-label);
+
+  /* ── Radii ───────────────────────────────────────────────────────────── */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-card: var(--radius-card);
+  --radius-field: var(--radius-field);
+  --radius-media: var(--radius-media);
+
+  /* ── Shadows ─────────────────────────────────────────────────────────── */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-glow: var(--glow-accent);
+  --shadow-glow-soft: var(--glow-accent-soft);
+
+  /* ── Motion ──────────────────────────────────────────────────────────── */
+  --ease-glide: var(--ease-glide);
+  --ease-out: var(--ease-out);
+  --ease-in: var(--ease-in);
+
+  /* ── Spacing additions (Tailwind's numeric scale already covers 4px) ─── */
+  --spacing-gutter: var(--gutter);
+  --spacing-section: var(--space-section);
+  --spacing-section-tight: var(--space-section-tight);
+
+  /* ── Containers ──────────────────────────────────────────────────────── */
+  --container-page: var(--container-max);
+  --container-prose: var(--container-text);
+
+  /* ── Z layers ────────────────────────────────────────────────────────── */
+  --z-index-scene: var(--z-scene);
+  --z-index-content: var(--z-content);
+  --z-index-nav: var(--z-nav);
+  --z-index-overlay: var(--z-overlay);
+  --z-index-dialog: var(--z-dialog);
+}
+
+/* ── Utilities the token set implies but Tailwind has no primitive for ─── */
+@utility label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+@utility glass {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-backdrop);
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+@utility raised {
+  box-shadow: var(--shadow-md), var(--highlight-top);
+}
+
+@utility hairline-rule {
+  height: 1px;
+  background: var(--gradient-hairline);
+}

@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap");
+
+/* Geist / Geist Mono are loaded in the Next.js app via next/font/google
+   (see src/app/layout.tsx) and exposed as --font-geist-sans / --font-geist-mono.
+   This design system loads the same families from the Google Fonts CDN so that
+   specimen cards, UI kits and templates render identically outside the app. */
+:root{
+  --font-sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"Geist Mono",ui-monospace,"SFMono-Regular","Menlo",monospace;
+  /* Aliases matching the Next.js app's CSS variables */
+  --font-geist-sans:var(--font-sans);
+  --font-geist-mono:var(--font-mono);
+}

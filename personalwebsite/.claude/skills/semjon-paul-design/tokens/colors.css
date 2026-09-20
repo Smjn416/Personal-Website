@@ -1,0 +1,84 @@
+/* ── Ink: the warm charcoal ground ───────────────────────────────────────────
+   Retuned from indigo to a near-neutral warm charcoal so a bright red can be
+   the system's primary colour without the two hues fighting. ink-950 is the
+   shader's corner value, ink-800 its centre value — keep
+   src/experience/BackgroundScene.tsx in sync. */
+:root{
+  --ink-990:#050405;
+  --ink-950:#0a0809;
+  --ink-900:#100d0f;
+  --ink-850:#161215;
+  --ink-800:#1e181b;
+  --ink-700:#292125;
+  --ink-600:#372d31;
+  --ink-500:#483b40;
+  --ink-400:#5c4c51;
+
+  /* ── Paper: text and hairlines, warmed to match the ground ───────────── */
+  --paper-100:#f7f1ef;
+  --paper-200:#e6dbd8;
+  --paper-300:#cfc2bf;
+  --paper-400:#ab9c99;
+  --paper-500:#8f7f7c;
+  --paper-600:#6e6060;
+  --paper-700:#5c4f50;
+
+  /* ── Flare: primary accent, bright red ───────────────────────────────── */
+  --flare-100:#ffe4e0;
+  --flare-200:#ffb5ab;
+  --flare-300:#ff7a6a;
+  --flare-400:#ff4438;
+  --flare-500:#e02a20;
+  --flare-600:#b01c15;
+
+  /* ── Verdigris: the one cool counterpoint, split-complement of the red ─ */
+  --verdigris-200:#a8d6d2;
+  --verdigris-300:#4e9e9e;
+  --verdigris-400:#3a7c7e;
+
+  /* ── Sand: warm neutral for large quiet areas and figure numerals ────── */
+  --sand-200:#e8d3bd;
+  --sand-300:#c9a882;
+
+  /* ── Semantic ─────────────────────────────────────────────────────────── */
+  --signal-positive:#6fbf8f;
+  --signal-warning:#e5b045;
+  /* Distinct from the brand red on purpose: errors read as crimson-pink, and
+     always carry a message and an icon so hue is never the only cue. */
+  --signal-danger:#ff4d6d;
+
+  /* ── Semantic aliases: use these in components, not the scales above ─── */
+  --bg-void:var(--ink-990);
+  --bg-page:var(--ink-950);
+  --bg-raised:var(--ink-850);
+  --bg-sunken:var(--ink-990);
+  --surface-card:color-mix(in oklab,var(--ink-800) 70%,transparent);
+  --surface-card-hover:color-mix(in oklab,var(--ink-700) 78%,transparent);
+  --surface-inset:var(--ink-900);
+
+  --text-strong:var(--paper-100);
+  --text-body:var(--paper-300);
+  --text-dim:var(--paper-500);
+  --text-faint:var(--paper-700);
+  --text-accent:var(--flare-300);
+  --text-on-accent:var(--ink-990);
+
+  --border-hairline:color-mix(in oklab,var(--paper-100) 8%,transparent);
+  --border-soft:color-mix(in oklab,var(--paper-100) 14%,transparent);
+  --border-strong:color-mix(in oklab,var(--paper-100) 26%,transparent);
+  --border-accent:color-mix(in oklab,var(--flare-400) 55%,transparent);
+
+  --accent:var(--flare-400);
+  --accent-hover:var(--flare-300);
+  --accent-press:var(--flare-500);
+  --accent-wash:color-mix(in oklab,var(--flare-400) 12%,transparent);
+  --accent-glow:color-mix(in oklab,var(--flare-400) 40%,transparent);
+  --focus-ring:var(--flare-400);
+
+  /* ── Scene: the page ground, matching the shader ─────────────────────── */
+  --gradient-scene:radial-gradient(125% 95% at 50% 48%,var(--ink-800) 0%,var(--ink-950) 60%,var(--ink-990) 100%);
+  --gradient-accent-veil:radial-gradient(80% 60% at 50% 0%,var(--accent-wash) 0%,transparent 70%);
+  --gradient-hairline:linear-gradient(90deg,transparent,var(--border-soft) 18%,var(--border-soft) 82%,transparent);
+  --grain-opacity:0.035; /* @kind other */
+  --fog-opacity:0.28; /* @kind other */
+}

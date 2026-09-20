@@ -1,0 +1,15 @@
+/* Shadows are deep and low-opacity — the page is already dark, so elevation
+   reads through a soft cast plus a 1px top highlight, never a hard drop. */
+:root{
+  --shadow-none:none;
+  --shadow-sm:0 1px 2px rgba(5,4,5,0.4);
+  --shadow-md:0 8px 24px -8px rgba(5,4,5,0.6);
+  --shadow-lg:0 24px 60px -18px rgba(5,4,5,0.75);
+  --shadow-xl:0 48px 120px -32px rgba(5,4,5,0.85);
+
+  --highlight-top:inset 0 1px 0 color-mix(in oklab,var(--paper-100) 10%,transparent);
+  --highlight-ring:inset 0 0 0 1px var(--border-hairline);
+
+  --glow-accent:0 0 0 1px var(--border-accent),0 0 32px -4px var(--accent-glow);
+  --glow-accent-soft:0 0 48px -12px var(--accent-glow);
+}

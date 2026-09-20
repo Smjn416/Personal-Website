@@ -42,39 +42,34 @@ const fragmentShader = /* glsl */ `
   void main() {
     vec2 uv = vUv;
 
-    // Aspect-corrected distance for circular glow
-    vec2 uvA     = vec2((uv.x      - 0.5) * uAspect, uv.y      - 0.5);
-    vec2 mouseA  = vec2((uMouse.x  - 0.5) * uAspect, uMouse.y  - 0.5);
-    float dist = length(uvA - mouseA);
+    // Aspect-corrected coords
+    vec2 uvA        = vec2((uv.x     - 0.5) * uAspect, uv.y     - 0.5);
+    vec2 mouseA     = vec2((uMouse.x - 0.5) * uAspect, uMouse.y - 0.5);
+    float mouseDist  = length(uvA - mouseA);
+    float centerDist = length(uvA);
 
-    // Base deep navy-black
-    vec3 base = vec3(0.010, 0.014, 0.028);
+    // ── Dark indigo/navy background ──────────────────────────────
+    vec3 edgeColor = vec3(0.028, 0.028, 0.070);  // ~#07071B corners
+    vec3 fillColor = vec3(0.082, 0.080, 0.196);  // ~#151431 center
 
-    // Glow layers (outer → inner)
-    float outerGlow = smoothstep(0.85, 0.0, dist);
-    float midGlow   = smoothstep(0.38, 0.0, dist);
-    float innerGlow = smoothstep(0.14, 0.0, dist);
+    float centerFade = smoothstep(0.90, 0.0, centerDist);
+    vec3 color = mix(edgeColor, fillColor, centerFade);
 
-    vec3 outerColor = vec3(0.035, 0.055, 0.160);
-    vec3 midColor   = vec3(0.060, 0.110, 0.380);
-    vec3 innerColor = vec3(0.200, 0.360, 0.950);
+    // Slow ambient noise — keeps it alive without mouse
+    float n  = noise(uv * 2.0 + uTime * 0.03);
+    float n2 = noise(uv * 4.5 - uTime * 0.02);
+    color += vec3(0.012, 0.010, 0.035) * (n + n2 * 0.4) * 0.030;
 
-    vec3 color = base;
-    color = mix(color, outerColor, outerGlow * 0.65);
-    color = mix(color, midColor,   midGlow   * 0.75);
-    color = mix(color, innerColor, innerGlow * 0.80);
-
-    // Slow ambient noise movement (alive when idle)
-    float n  = noise(uv * 2.5 + uTime * 0.04);
-    float n2 = noise(uv * 5.0 - uTime * 0.025);
-    color += vec3(0.020, 0.035, 0.110) * (n + n2 * 0.5) * 0.018;
+    // ── Mouse: barely-visible brightness lift ────────────────────
+    float spot = smoothstep(0.07, 0.0, mouseDist);
+    color += color * spot * 0.10;
 
     // Film grain
-    color += hash(uv + fract(uTime * 0.1)) * 0.012;
+    color += hash(uv + fract(uTime * 0.1)) * 0.010;
 
-    // Edge vignette
-    float vignette = smoothstep(1.1, 0.25, length(vec2((uv.x - 0.5) * uAspect, uv.y - 0.5)));
-    color *= mix(0.35, 1.0, vignette);
+    // Edge vignette — corners fall off to near black
+    float vignette = smoothstep(1.0, 0.10, centerDist);
+    color *= mix(0.40, 1.0, vignette);
 
     gl_FragColor = vec4(color, 1.0);
   }
@@ -107,9 +102,8 @@ function BackgroundPlane() {
   }, [])
 
   useFrame(({ clock }) => {
-    mouseSmooth.current.lerp(mouseTarget.current, 0.065)
-    uniforms.uMouse.value.copy(mouseSmooth.current)
-    uniforms.uAspect.value = viewport.width / viewport.height
+    uniforms.uMouse.value.copy(mouseTarget.current)
+    uniforms.uAspect.value = window.innerWidth / window.innerHeight
     uniforms.uTime.value = clock.getElapsedTime()
   })
 

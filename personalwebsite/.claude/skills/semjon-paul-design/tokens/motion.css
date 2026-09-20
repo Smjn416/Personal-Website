@@ -1,0 +1,28 @@
+/* One easing family: symmetric and gliding. Nothing in this system bounces,
+   overshoots or springs — the 3D scene supplies the drama, the UI stays calm. */
+:root{
+  --ease-glide:cubic-bezier(0.65,0,0.35,1); /* @kind other */
+  --ease-out:cubic-bezier(0.22,1,0.36,1); /* @kind other */
+  --ease-in:cubic-bezier(0.55,0,1,0.45); /* @kind other */
+  --ease-linear:linear; /* @kind other */
+  --gsap-ease:"power2.inOut"; /* @kind other */
+  --gsap-ease-out:"power3.out"; /* @kind other */
+
+  --dur-instant:90ms; /* @kind other */
+  --dur-fast:180ms; /* @kind other */
+  --dur-base:320ms; /* @kind other */
+  --dur-slow:520ms; /* @kind other */
+  --dur-reveal:900ms; /* @kind other */
+  --dur-scene:1400ms; /* @kind other */
+
+  --stagger-tight:0.04s; /* @kind other */
+  --stagger-base:0.07s; /* @kind other */
+  --stagger-loose:0.12s; /* @kind other */
+
+  --reveal-distance:2.5rem; /* @kind spacing */
+  --reveal-distance-lg:5rem; /* @kind spacing */
+
+  --hover-lift:-2px; /* @kind spacing */
+  --press-scale:0.985; /* @kind other */
+  --magnet-strength:0.18; /* @kind other */
+}

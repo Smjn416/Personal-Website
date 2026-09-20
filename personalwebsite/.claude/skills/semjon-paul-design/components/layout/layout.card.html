@@ -1,0 +1,22 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Layout — Container, Section" subtitle="Page frame and vertical rhythm" -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css"><style>html,body{background:var(--bg-page)}body{margin:0}#root{padding:0}</style></head><body><div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+const { Container, Section, Heading, Card, Tag } = window.SemjonPaulDesignSystem_d2b8a3
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <div style={{background:'var(--gradient-scene)'}}>
+    <Section index="01" label="Selected work" tight hairline={false} style={{paddingBlock:'var(--space-8)'}}>
+      <Heading level={2}>Caustics on a still surface</Heading>
+      <div style={{display:'flex',gap:'var(--space-2)',marginTop:'var(--space-4)'}}>
+        <Tag>WebGL</Tag><Tag>GLSL</Tag><Tag accent>2026</Tag>
+      </div>
+    </Section>
+    <Section index="02" label="About" tight style={{paddingBlock:'var(--space-8)'}} width="text">
+      <p style={{color:'var(--text-body)',margin:0}}>Container width="text" keeps prose on the 44rem measure. The hairline above marks the section boundary.</p>
+    </Section>
+  </div>
+)
+</script></body></html>

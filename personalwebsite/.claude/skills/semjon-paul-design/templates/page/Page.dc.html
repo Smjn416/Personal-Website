@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Portfolio page" description="Scene-backed page: no app bar, display hero, work grid, prose section and contact form." -->
+<helmet><script src="./ds-base.js"></script><style>html,body{margin:0;height:100%;background:#0a0809}#dc-root{min-height:100%}</style></helmet>
+<div style="position:relative;min-height:100vh;background:radial-gradient(125% 95% at 50% 48%,#1e181b 0%,#0a0809 60%,#050405 100%);font-family:'Geist',ui-sans-serif,system-ui,sans-serif;color:#cfc2bf;-webkit-font-smoothing:antialiased">
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.SceneBackdrop" hint-size="100%,100%"></x-import>
+<div style="position:fixed;top:2rem;left:clamp(1.25rem,4vw,3rem);z-index:30;font-size:1.0625rem;font-weight:500;letter-spacing:-0.02em;color:#f7f1ef">Semjon Paul</div>
+<nav aria-label="Sections" style="position:fixed;top:50%;right:clamp(1.25rem,4vw,3rem);transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;align-items:flex-end;gap:1.25rem">
+<a href="#work" style="display:flex;align-items:center;gap:0.75rem;text-decoration:none;font-family:'Geist Mono',ui-monospace,monospace;font-size:0.6875rem;letter-spacing:0.18em;text-transform:uppercase;color:#ff4438"><span style="display:inline-block;width:28px;height:1px;background:currentColor"></span>Work</a>
+<a href="#about" style="display:flex;align-items:center;gap:0.75rem;text-decoration:none;font-family:'Geist Mono',ui-monospace,monospace;font-size:0.6875rem;letter-spacing:0.18em;text-transform:uppercase;color:#5c4f50" style-hover="color:#ff7a6a"><span style="display:inline-block;width:12px;height:1px;background:currentColor"></span>About</a>
+<a href="#contact" style="display:flex;align-items:center;gap:0.75rem;text-decoration:none;font-family:'Geist Mono',ui-monospace,monospace;font-size:0.6875rem;letter-spacing:0.18em;text-transform:uppercase;color:#5c4f50" style-hover="color:#ff7a6a"><span style="display:inline-block;width:12px;height:1px;background:currentColor"></span>Contact</a>
+</nav>
+<a href="#contact" style="position:fixed;bottom:2rem;left:clamp(1.25rem,4vw,3rem);z-index:30;display:flex;align-items:center;gap:0.75rem;text-decoration:none;font-family:'Geist Mono',ui-monospace,monospace;font-size:0.6875rem;letter-spacing:0.18em;text-transform:uppercase;color:#8f7f7c"><span style="width:6px;height:6px;border-radius:50%;background:#4e9e9e;flex-shrink:0"></span>Available for work</a>
+<main style="position:relative;z-index:10">
+<section style="min-height:88vh;display:flex;flex-direction:column;justify-content:flex-end;max-width:88rem;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3rem);padding-right:calc(clamp(1.25rem,4vw,3rem) + 9rem);padding-bottom:6rem;padding-top:7rem">
+<div style="font-family:'Geist Mono',ui-monospace,monospace;font-size:0.6875rem;letter-spacing:0.18em;text-transform:uppercase;color:#8f7f7c;margin-bottom:2rem">Interactive &amp; 3D — Berlin</div>
+<h1 style="margin:0;font-size:clamp(3.25rem,11vw,10.5rem);font-weight:300;letter-spacing:-0.035em;line-height:0.92;color:#f7f1ef;max-width:18ch;text-wrap:balance">Form before information</h1>
+<p style="margin:2.5rem 0 0;max-width:38ch;font-size:clamp(1.0625rem,1.2vw,1.25rem);line-height:1.6;color:#cfc2bf;text-wrap:pretty">I build websites where the first thing you notice is the material, and the second is what it is for.</p>
+<div style="display:flex;align-items:center;gap:1.25rem;margin-top:3rem">
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.MagneticButton" hint-size="180px,56px"><x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Button" variant="primary" size="lg" hint-size="180px,56px">See the work</x-import></x-import>
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Button" variant="ghost" size="lg" hint-size="110px,56px">About</x-import>
+</div>
+</section>
+<section id="work" style="position:relative;padding-block:clamp(5rem,12vw,12rem)">
+<div aria-hidden="true" style="position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(247,241,239,0.14) 18%,rgba(247,241,239,0.14) 82%,transparent)"></div>
+<div style="max-width:88rem;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3rem)">
+<div style="display:flex;align-items:baseline;gap:1rem;margin-bottom:2.5rem;font-family:'Geist Mono',ui-monospace,monospace;font-size:0.6875rem;letter-spacing:0.18em;text-transform:uppercase;color:#8f7f7c"><span style="color:#5c4f50">01</span><span>Selected work</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:1.5rem;align-items:start">
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Card" href="#" index="01" label="Case study" title="Caustics on a still surface" meta="Real-time GLSL · 2026" hint-size="100%,280px">Light through a surface that does not exist.</x-import>
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Card" href="#" index="02" label="Experiment" title="Instanced dust" meta="Three.js · 2025" hint-size="100%,280px">Forty thousand particles on one draw call.</x-import>
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Card" href="#" index="03" label="Writing" title="On easing" meta="Notes · 2025" hint-size="100%,280px">Why one easing family beats five.</x-import>
+</div>
+</div>
+</section>
+<section id="about" style="position:relative;padding-block:clamp(5rem,12vw,12rem)">
+<div aria-hidden="true" style="position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(247,241,239,0.14) 18%,rgba(247,241,239,0.14) 82%,transparent)"></div>
+<div style="max-width:88rem;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3rem)">
+<div style="display:flex;align-items:baseline;gap:1rem;margin-bottom:2.5rem;font-family:'Geist Mono',ui-monospace,monospace;font-size:0.6875rem;letter-spacing:0.18em;text-transform:uppercase;color:#8f7f7c"><span style="color:#5c4f50">02</span><span>About</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:4rem;align-items:start">
+<h2 style="margin:0;font-size:clamp(2.5rem,7.5vw,6.5rem);font-weight:300;letter-spacing:-0.035em;line-height:0.92;color:#f7f1ef;max-width:16ch;min-width:0;text-wrap:balance">A shader is a material</h2>
+<div style="min-width:0;max-width:62ch">
+<p style="margin:0;font-size:clamp(1.0625rem,1.2vw,1.25rem);line-height:1.6;color:#cfc2bf;text-wrap:pretty">I have spent six years moving between motion design and front-end engineering, and the work I care about sits exactly on that line: interfaces that behave like objects rather than documents.</p>
+<p style="margin:1.25rem 0 0;font-size:1rem;line-height:1.6;color:#8f7f7c;text-wrap:pretty">Most of what I make runs in a browser at sixty frames a second. That constraint decides almost everything, which is the part I enjoy.</p>
+<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:2.5rem">
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Tag" hint-size="80px,28px">Three.js</x-import>
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Tag" hint-size="60px,28px">GLSL</x-import>
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Tag" hint-size="60px,28px">GSAP</x-import>
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Tag" accent="{{ true }}" hint-size="60px,28px">2026</x-import>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="contact" style="position:relative;padding-block:clamp(5rem,12vw,12rem)">
+<div aria-hidden="true" style="position:absolute;inset:0 0 auto 0;height:1px;background:linear-gradient(90deg,transparent,rgba(247,241,239,0.14) 18%,rgba(247,241,239,0.14) 82%,transparent)"></div>
+<div style="max-width:88rem;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3rem)">
+<div style="display:flex;align-items:baseline;gap:1rem;margin-bottom:2.5rem;font-family:'Geist Mono',ui-monospace,monospace;font-size:0.6875rem;letter-spacing:0.18em;text-transform:uppercase;color:#8f7f7c"><span style="color:#5c4f50">03</span><span>Contact</span></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:4rem;align-items:start">
+<div style="min-width:0">
+<h2 style="margin:0;font-size:clamp(2.5rem,7.5vw,6.5rem);font-weight:300;letter-spacing:-0.035em;line-height:0.92;color:#f7f1ef;max-width:14ch;text-wrap:balance">Tell me what you are building</h2>
+<p style="margin:2rem 0 0;max-width:38ch;font-size:clamp(1.0625rem,1.2vw,1.25rem);line-height:1.6;color:#cfc2bf;text-wrap:pretty">Selected client work, collaborations and commissions. I answer everything within a couple of days.</p>
+</div>
+<div style="min-width:0;padding:2rem;border-radius:1.375rem;background:rgba(30,24,27,0.72);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid rgba(247,241,239,0.08);box-shadow:0 24px 60px -18px rgba(5,4,5,0.75),inset 0 1px 0 rgba(247,241,239,0.1);display:grid;gap:1.25rem">
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Field" label="Name" htmlFor="t-name" hint-size="100%,72px"><x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Input" id="t-name" placeholder="Your name" hint-size="100%,46px"></x-import></x-import>
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Field" label="Email" htmlFor="t-email" hint-size="100%,72px"><x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Input" id="t-email" type="email" placeholder="you@studio.com" hint-size="100%,46px"></x-import></x-import>
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Field" label="Message" htmlFor="t-msg" hint="What are you building, and when do you need it?" hint-size="100%,150px"><x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Textarea" id="t-msg" rows="{{ 5 }}" hint-size="100%,120px"></x-import></x-import>
+<x-import component-from-global-scope="SemjonPaulDesignSystem_d2b8a3.Button" variant="primary" fullWidth="{{ true }}" hint-size="100%,48px">Send message</x-import>
+</div>
+</div>
+</div>
+</section>
+<footer style="padding-top:4rem;padding-bottom:3rem">
+<div style="max-width:88rem;margin-inline:auto;padding-inline:clamp(1.25rem,4vw,3rem)">
+<div style="height:1px;background:linear-gradient(90deg,transparent,rgba(247,241,239,0.14) 18%,rgba(247,241,239,0.14) 82%,transparent)"></div>
+<div style="padding-top:2rem;display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;align-items:baseline;font-family:'Geist Mono',ui-monospace,monospace;font-size:0.8125rem;letter-spacing:0.02em;color:#5c4f50">
+<span>Semjon Paul — Interactive &amp; 3D</span>
+<span>© 2026</span>
+</div>
+</div>
+</footer>
+</main>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,15 @@
+/* Glass is the system's one decorative surface: a blurred, barely-tinted pane
+   with a hairline edge and a top highlight. Used for nav, cards over the 3D
+   scene, and overlays — never for body copy backgrounds. */
+:root{
+  --glass-bg:color-mix(in oklab,var(--ink-800) 52%,transparent);
+  --glass-bg-strong:color-mix(in oklab,var(--ink-850) 72%,transparent);
+  --glass-border:color-mix(in oklab,var(--paper-100) 12%,transparent);
+  --glass-blur:18px; /* @kind spacing */
+  --glass-blur-strong:32px; /* @kind spacing */
+  --glass-saturate:1.4; /* @kind other */
+  --glass-backdrop:blur(var(--glass-blur)) saturate(var(--glass-saturate)); /* @kind other */
+  --glass-backdrop-strong:blur(var(--glass-blur-strong)) saturate(var(--glass-saturate)); /* @kind other */
+  --glass-shadow:var(--shadow-lg),var(--highlight-top);
+  --glass-sheen:linear-gradient(160deg,color-mix(in oklab,var(--paper-100) 8%,transparent) 0%,transparent 42%); /* @kind color */
+}

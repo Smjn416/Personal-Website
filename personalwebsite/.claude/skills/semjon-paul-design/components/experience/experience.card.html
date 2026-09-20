@@ -1,0 +1,19 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Experience — SceneBackdrop" subtitle="Warm-charcoal ground under wind-driven fog" -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css"><style>html,body{background:var(--bg-page);height:100%}body{margin:0}#root{position:relative;height:100vh}</style></head><body><div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+const { SceneBackdrop } = window.SemjonPaulDesignSystem_d2b8a3
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.Fragment>
+    <SceneBackdrop fixed={false} />
+    <div style={{position:'relative',zIndex:'var(--z-content)',padding:'26px 28px'}}>
+      <div style={{fontFamily:'var(--font-mono)',fontSize:'var(--text-label)',letterSpacing:'var(--tracking-label)',textTransform:'uppercase',color:'var(--text-dim)'}}>Move the cursor</div>
+      <div style={{fontSize:'2rem',fontWeight:'var(--weight-light)',letterSpacing:'-0.03em',color:'var(--text-strong)',marginTop:'10px'}}>#050405 → #1e181b</div>
+      <div style={{fontFamily:'var(--font-mono)',fontSize:'10.5px',color:'var(--text-faint)',marginTop:'10px'}}>radial fill · wind-driven fog · domain warp · film grain · edge vignette</div>
+    </div>
+  </React.Fragment>
+)
+</script></body></html>

@@ -1,0 +1,185 @@
+'use client'
+
+/**
+ * The brand's ground: warm-charcoal radial fill under a wind-driven fog.
+ *
+ * This is the React Three Fiber port of the design system's canonical shader
+ * (components/experience/SceneBackdrop.jsx). The two must stay in sync — if you
+ * change the fog here, change it there, and vice versa.
+ *
+ * Mount once, at the root, behind everything. Content sits at z-content or above.
+ */
+
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { useRef, useMemo, useEffect } from 'react'
+import { Mesh, Vector2 } from 'three'
+
+type BackgroundUniforms = {
+  uMouse: { value: Vector2 }
+  uAspect: { value: number }
+  uTime: { value: number }
+}
+
+const vertexShader = /* glsl */ `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`
+
+const fragmentShader = /* glsl */ `
+  uniform vec2 uMouse;
+  uniform float uAspect;
+  uniform float uTime;
+  varying vec2 vUv;
+
+  float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+  }
+
+  float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    f = f * f * (3.0 - 2.0 * f);
+    return mix(
+      mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x),
+      mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x),
+      f.y
+    );
+  }
+
+  float fbm(vec2 p) {
+    float v = 0.0;
+    float a = 0.5;
+    for (int i = 0; i < 3; i++) {
+      v += a * noise(p);
+      p *= 2.03;
+      a *= 0.5;
+    }
+    return v;
+  }
+
+  void main() {
+    vec2 uv = vUv;
+
+    vec2 uvA    = vec2((uv.x     - 0.5) * uAspect, uv.y     - 0.5);
+    vec2 mouseA = vec2((uMouse.x - 0.5) * uAspect, uMouse.y - 0.5);
+    float mouseDist  = length(uvA - mouseA);
+    float centerDist = length(uvA);
+
+    // ── Ground: warm charcoal, corners darker ──────────────────────────
+    vec3 edgeColor = vec3(0.020, 0.016, 0.020);  // ~#050405
+    vec3 fillColor = vec3(0.118, 0.094, 0.106);  // ~#1e181b
+
+    float centerFade = smoothstep(0.95, 0.0, centerDist);
+    vec3 color = mix(edgeColor, fillColor, centerFade);
+
+    // ── Wind-driven fog ────────────────────────────────────────────────
+    // Coordinates stretched 4:1 on y so the noise reads as horizontal
+    // streaks rather than clouds; a slow domain warp bends them so the
+    // drift never looks like a flat scroll.
+    vec2 wind  = vec2(uTime * 0.026, uTime * -0.005);
+    vec2 fogUv = vec2(uv.x * 1.5, uv.y * 4.0);
+    vec2 warp  = vec2(
+      noise(fogUv * 0.55 + wind * 0.4),
+      noise(fogUv * 0.55 + wind * 0.4 + vec2(5.2, 1.3))
+    );
+    float fog = fbm(fogUv + wind + warp * 0.7);
+    fog = smoothstep(0.26, 0.60, fog);
+
+    // Broad mid band — absent at the very top and bottom so text always
+    // has clean ground under it.
+    float band = smoothstep(1.10, 0.20, uv.y) * smoothstep(-0.05, 0.40, uv.y);
+    fog *= band;
+
+    // Densest parts take a faint warm cast from the accent red. Calibrated
+    // by measurement: at 0.28 the fog lifts local brightness by about 7 of
+    // 28 levels — structure, not a graphic. Above ~0.45 it becomes an effect.
+    vec3 fogTint = vec3(0.30, 0.13, 0.12);
+    color += fogTint * fog * 0.28;
+
+    // A finer, faster layer gives the fog its texture from close up.
+    float fine = noise(vec2(uv.x * 3.2, uv.y * 10.0) + wind * 2.6);
+    color += vec3(0.11, 0.09, 0.10) * fine * fog * 0.48;
+
+    // ── Mouse: barely-visible brightness lift ──────────────────────────
+    float spot = smoothstep(0.09, 0.0, mouseDist);
+    color += color * spot * 0.12;
+
+    // Film grain
+    color += hash(uv + fract(uTime * 0.1)) * 0.012;
+
+    // Edge vignette — corners fall off to near black
+    float vignette = smoothstep(1.0, 0.10, centerDist);
+    color *= mix(0.38, 1.0, vignette);
+
+    gl_FragColor = vec4(color, 1.0);
+  }
+`
+
+function BackgroundPlane({ reduced }: { reduced: boolean }) {
+  const { viewport } = useThree()
+  const meshRef = useRef<Mesh>(null)
+  const mouseTarget = useRef(new Vector2(0.5, 0.5))
+
+  const uniforms = useMemo<BackgroundUniforms>(
+    () => ({
+      uMouse:  { value: new Vector2(0.5, 0.5) },
+      uAspect: { value: 1.0 },
+      uTime:   { value: 0 },
+    }),
+    []
+  )
+
+  useEffect(() => {
+    if (reduced) return
+    const onMove = (e: MouseEvent) => {
+      mouseTarget.current.set(
+        e.clientX / window.innerWidth,
+        1 - e.clientY / window.innerHeight
+      )
+    }
+    window.addEventListener('mousemove', onMove)
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [reduced])
+
+  useFrame(({ clock }) => {
+    uniforms.uMouse.value.copy(mouseTarget.current)
+    uniforms.uAspect.value = window.innerWidth / window.innerHeight
+    uniforms.uTime.value = reduced ? 0 : clock.getElapsedTime()
+  })
+
+  return (
+    <mesh ref={meshRef} scale={[viewport.width, viewport.height, 1]}>
+      <planeGeometry args={[1, 1]} />
+      <shaderMaterial
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        uniforms={uniforms}
+        depthWrite={false}
+      />
+    </mesh>
+  )
+}
+
+export function BackgroundScene() {
+  const reduced =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  return (
+    <div className="fixed inset-0 -z-10 bg-page">
+      <Canvas
+        camera={{ position: [0, 0, 5], fov: 75 }}
+        // Capped at 1.5: the fog costs real fragment work and the noise hides
+        // the difference at higher densities.
+        dpr={[1, 1.5]}
+        frameloop={reduced ? 'demand' : 'always'}
+        gl={{ antialias: false, alpha: false }}
+      >
+        <BackgroundPlane reduced={reduced} />
+      </Canvas>
+    </div>
+  )
+}

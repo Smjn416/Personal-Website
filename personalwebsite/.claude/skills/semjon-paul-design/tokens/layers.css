@@ -1,0 +1,9 @@
+:root{
+  --z-scene:0; /* @kind other */
+  --z-content:10; /* @kind other */
+  --z-sticky:20; /* @kind other */
+  --z-nav:30; /* @kind other */
+  --z-overlay:40; /* @kind other */
+  --z-dialog:50; /* @kind other */
+  --z-cursor:60; /* @kind other */
+}
